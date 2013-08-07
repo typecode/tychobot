@@ -13,6 +13,7 @@ RESTAURANTS = {
     'tenda': ('Tenda Asian Bistro', 'http://www.seamless.com/food-delivery/tenda-asian-bistro-brooklyn.7457.r#menu-tab'),
     'tutt': ('Tutt Cafe', 'http://www.tuttcafe.com/menu.html'),
     'indian': ('Curry Heights', 'http://www.seamless.com/food-delivery/curry-heights-brooklyn.7023.r#menu-tab'),
+    'pizza': ('Il Porto', 'http://www.seamless.com/food-delivery/il-porto-brooklyn.6217.r#menu-tab'),
 }
 
 RESTAURANT_RE = re.compile(r'({})'.format('|'.join(RESTAURANTS)))
