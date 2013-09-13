@@ -24,7 +24,13 @@ class TychoBot(irc.IRCClient):
     username = 'tycho'
     password = 'tycho'
 
-    channels = ['#lobby', '#architizer', '#bot-testing']
+    channels = [
+        '#lobby',
+        '#architizer',
+        '#bot-testing'
+        '#typecode',
+        '#designtrust',
+    ]
 
     admins = ['matt']
 
