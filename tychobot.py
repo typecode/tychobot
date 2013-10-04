@@ -14,6 +14,7 @@ RESTAURANTS = {
     'tutt': ('Tutt Cafe', 'http://www.tuttcafe.com/menu.html'),
     'indian': ('Curry Heights', 'http://www.seamless.com/food-delivery/curry-heights-brooklyn.7023.r#menu-tab'),
     'pizza': ('Il Porto', 'http://www.seamless.com/food-delivery/il-porto-brooklyn.6217.r#menu-tab'),
+    'doubles': ('A&A Bake & Doubles Shop', 'http://www.yelp.com/biz/a-and-a-bake-and-doubles-shop-brooklyn'),
 }
 
 RESTAURANT_RE = re.compile(r'({})'.format('|'.join(RESTAURANTS)))
