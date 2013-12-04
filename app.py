@@ -1,5 +1,4 @@
 
-
 import re
 
 from twisted.internet import protocol, reactor, ssl, defer
@@ -18,8 +17,6 @@ RESTAURANTS = {
 }
 
 RESTAURANT_RE = re.compile(r'({})'.format('|'.join(RESTAURANTS)))
-
-RESTAURANT_RE = re.compile(r'(developers)')
 
 
 class TychoBot(irc.IRCClient):
@@ -82,9 +79,6 @@ class TychoBot(irc.IRCClient):
         hay = r'(hey |hay )?(guys|guise)'
         if re.match(hay, message):
             self.ping_channel(channel)
-
-        for name in RESTAURANT_RE.findall(message.lower()):
-            self.say(channel, '{}: {}'.format(*RESTAURANTS[name]))
 
         for name in RESTAURANT_RE.findall(message.lower()):
             self.say(channel, '{}: {}'.format(*RESTAURANTS[name]))
