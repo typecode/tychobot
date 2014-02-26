@@ -11,6 +11,7 @@ def parse_nickname(user):
 RESTAURANTS = {
     'tenda': ('Tenda Asian Bistro', 'http://www.seamless.com/food-delivery/tenda-asian-bistro-brooklyn.7457.r#menu-tab'),
     'tutt': ('Tutt Cafe', 'http://www.tuttcafe.com/menu.html'),
+    'better indian': ('Asya Indian Restaurant', 'http://www.seamless.com/food-delivery/asya-indian-restaurant-brooklyn.24496.r'),
     'indian': ('Curry Heights', 'http://www.seamless.com/food-delivery/curry-heights-brooklyn.7023.r#menu-tab'),
     'pizza': ('Il Porto', 'http://www.seamless.com/food-delivery/il-porto-brooklyn.6217.r#menu-tab'),
     'doubles': ('A&A Bake & Doubles Shop', 'http://www.yelp.com/biz/a-and-a-bake-and-doubles-shop-brooklyn'),
@@ -82,6 +83,7 @@ class TychoBot(irc.IRCClient):
 
         for name in RESTAURANT_RE.findall(message.lower()):
             self.say(channel, '{}: {}'.format(*RESTAURANTS[name]))
+            break
 
     def ping_channel(self, channel):
         print('ping_channel')
