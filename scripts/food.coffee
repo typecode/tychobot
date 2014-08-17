@@ -33,7 +33,7 @@ send_force_required = (msg, extra) ->
         (Add 'force' to the end of the command if you're sure you want to do this.)
     """)
 
-commands = [
+blacklist = [
     'add',
     'remove',
     'alias',
@@ -52,7 +52,7 @@ module.exports = (robot) ->
         menu = msg.match[2]
         force = msg.match[3]?
 
-        if name in commands
+        if name in blacklist
             msg.send("#{name} is a command and can't be used as a name.")
             return
 
@@ -110,7 +110,7 @@ module.exports = (robot) ->
             return
 
         # check that alias isn't a command
-        if alias in commands
+        if alias in blacklist
             msg.send("#{alias} is a command and can't be used as a alias.")
             return
 
@@ -130,7 +130,7 @@ module.exports = (robot) ->
     robot.respond /food (.*)/, (msg) ->
         name = msg.match[1]
         # ignore command names
-        if name in commands
+        if name in blacklist
             return
 
         restaurants = robot.brain.data.food.restaurants
