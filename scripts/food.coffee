@@ -33,29 +33,31 @@ send_force_required = (msg, extra) ->
         (Add 'force' to the end of the command if you're sure you want to do this.)
     """)
 
+init_brain = ->
+    console.log 'init brain'
+    robot.brain.data.food ?= {}
+    robot.brain.data.food.restaurants ?= {}
+    robot.brain.data.food.aliases ?= {}
+
 blacklist = [
     'add',
     'remove',
     'alias',
     'unalias',
+    'init',
 ]
 
 module.exports = (robot) ->
     robot.on 'running', ->
-        console.log("loaded")
+        init_brain()
 
-        robot.brain.data.food ?= {}
-        robot.brain.data.food.restaurants ?= {}
-        robot.brain.data.food.aliases ?= {}
-
-        console.log(robot.brain.data.food)
+    robot.respond /food init$/, (msg) ->
+        init_brain()
 
     robot.respond /food add "([\w-' ]+)" (https?:\/\/[^\s]+)( force)?/, (msg) ->
         name = msg.match[1]
         menu = msg.match[2]
         force = msg.match[3]?
-
-        console.log("food add name: #{name} menu: #{menu}")
 
         if name in blacklist
             msg.send("#{name} is a command and can't be used as a name.")
@@ -79,8 +81,6 @@ module.exports = (robot) ->
         name = msg.match[1]
         force = msg.match[2]?
 
-        console.log("food remove name: #{name}")
-
         if not force
             send_force_required(msg)
             return
@@ -90,9 +90,6 @@ module.exports = (robot) ->
         msg.send "Forgot all about #{name}."
 
     robot.respond /food$/i, (msg) ->
-        console.log("food")
-        console.log(robot.brain.data.food)
-
         reverse_aliases = {}
         for alias, name of robot.brain.data.food.aliases
             reverse_aliases[name] ||= []
@@ -114,8 +111,6 @@ module.exports = (robot) ->
         alias = msg.match[2]
         force = msg.match[3]?
 
-        console.log("food alias name: #{name} alias: #{alias}")
-
         # check that restaurant exists
         if name not of robot.brain.data.food.restaurants
             msg.send("I don't know about #{name} yet.")
@@ -136,16 +131,11 @@ module.exports = (robot) ->
     robot.respond /food unalias (\w+)/, (msg) ->
         alias = msg.match[1]
 
-        console.log("food unalias alias: #{alias}")
-
         if alias of robot.brain.data.food.aliases
             delete robot.brain.data.food.aliases[alias]
 
     robot.respond /food (.*)/, (msg) ->
         name = msg.match[1]
-
-        console.log("food name: #{name}")
-        console.log(robot.brain.data.food)
 
         # ignore command names
         if name in blacklist
