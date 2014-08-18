@@ -92,6 +92,7 @@ module.exports = (robot) ->
 
     robot.respond /food$/i, (msg) ->
         console.log("food")
+        console.log(robot.brain.data.food)
 
         reverse_aliases = {}
         for alias, name of robot.brain.data.food.aliases
@@ -145,6 +146,7 @@ module.exports = (robot) ->
         name = msg.match[1]
 
         console.log("food name: #{name}")
+        console.log(robot.brain.data.food)
 
         # ignore command names
         if name in blacklist
