@@ -1,5 +1,5 @@
 # Description:
-#   Helps your satisfy your hunger
+#   Helps you satisfy your hunger
 #
 # Dependencies:
 #   None
@@ -41,8 +41,7 @@ blacklist = [
 ]
 
 module.exports = (robot) ->
-
-    robot.brain.on 'loaded', ->
+    robot.on 'running', ->
         console.log("loaded")
 
         robot.brain.data.food ?= {}
